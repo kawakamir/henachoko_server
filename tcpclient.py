@@ -1,10 +1,10 @@
 import socket
 
+
 class TCPClient:
     """
     TCP通信を行うクライアントを表すクラス
     """
-
     def request(self):
         """
         サーバーへリクエストを送信する
@@ -19,9 +19,10 @@ class TCPClient:
 
             # サーバーと接続する
             print("=== サーバーと接続します ===")
-            client_socket.connect(("localhost", 80))
-            print("=== サーバーとの接続が完了しました　===")
+            client_socket.connect(("127.0.0.1", 80))
+            print("=== サーバーとの接続が完了しました ===")
 
+            # サーバーに送信するリクエストを、ファイルから取得する
             with open("client_send.txt", "rb") as f:
                 request = f.read()
 
@@ -40,6 +41,7 @@ class TCPClient:
 
         finally:
             print("=== クライアントを停止します。 ===")
+
 
 if __name__ == '__main__':
     client = TCPClient()
