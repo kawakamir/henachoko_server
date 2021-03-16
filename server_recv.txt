@@ -13,4 +13,6 @@ Sec-Fetch-User: ?1
 Sec-Fetch-Dest: document
 Accept-Encoding: gzip, deflate, br
 Accept-Language: ja,en;q=0.9,en-US;q=0.8
+Range: bytes=44-44
+If-Range: "2d-5913a76187bc0"
 
