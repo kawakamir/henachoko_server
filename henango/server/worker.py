@@ -11,7 +11,7 @@ from henango.http.response import HTTPResponse
 from urls import URL_VIEW
 
 
-class WorkerThread(Thread):
+class Worker(Thread):
     # 実行ファイルのあるディレクトリ
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
     # 静的配信するファイルを置くディレクトリ
