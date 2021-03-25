@@ -6,15 +6,15 @@ from pprint import pformat
 
 from henango.http.request import HTTPRequest
 from henango.http.response import HTTPResponse
+from henango.template.render import render
 
 
 def now(request: HTTPRequest) -> HTTPResponse:
     """
     現在時刻を表示するHTMLを生成する
     """
-    with open("./templates/now.html") as f:
-        template = f.read()
-        html = template.format(now=datetime.now())
+    context = {"now": datetime.now()}
+    html = render("./templates/now.html", context)
 
     body = textwrap.dedent(html).encode()
     content_type = "text/html; charset=UTF-8"
