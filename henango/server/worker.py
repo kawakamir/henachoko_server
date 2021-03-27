@@ -124,11 +124,12 @@ class Worker(Thread):
             # pathから拡張子を取得
             if "." in request.path:
                 ext = request.path.rsplit(".", maxsplit=1)[-1]
+                # 拡張子からMIME Typeを取得
+                # 知らない対応していない拡張子の場合はoctet-streamとする
+                response.content_type = self.MIME_TYPES.get(ext, "application/octet-stream")
             else:
-                ext = ""
-            # 拡張子からMIME Typeを取得
-            # 知らない対応していない拡張子の場合はoctet-streamとする
-            response.content_type = self.MIME_TYPES.get(ext, "application/octet-stream")
+                # pathに拡張子がない場合はhtml扱いとする
+                response.content_type = "text/html; charset=UTF-8"
 
         response_header = ""
         response_header += f"Date: {datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT')}\r\n"
