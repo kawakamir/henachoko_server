@@ -1,4 +1,3 @@
-
 import textwrap
 import urllib.parse
 from datetime import datetime
@@ -6,7 +5,7 @@ from pprint import pformat
 
 from henango.http.request import HTTPRequest
 from henango.http.response import HTTPResponse
-from henango.template.render import render
+from henango.template.renderer import render
 
 
 def now(request: HTTPRequest) -> HTTPResponse:
@@ -14,9 +13,8 @@ def now(request: HTTPRequest) -> HTTPResponse:
     現在時刻を表示するHTMLを生成する
     """
     context = {"now": datetime.now()}
-    html = render("./templates/now.html", context)
-
-    body = textwrap.dedent(html).encode()
+    html = render("now.html", context)
+    body = html.encode()
     content_type = "text/html; charset=UTF-8"
 
     return HTTPResponse(body=body, content_type=content_type, status_code=200)
