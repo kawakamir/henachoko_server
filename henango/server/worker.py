@@ -23,6 +23,7 @@ class Worker(Thread):
     # ステータスコードとステータスラインの対応
     STATUS_LINES = {
         200: "200 OK",
+        302: "302 Found",
         404: "404 Not Found",
         405: "405 Method Not Allowed",
     }
@@ -61,11 +62,11 @@ class Worker(Thread):
             if isinstance(response.body, str):
                 response.body = response.body.encode()
 
-            # レスポンスヘッダーを生成
-            response_header = self.build_response_header(response, request)
-
             # レスポンスラインを生成
             response_line = self.build_response_line(response)
+
+            # レスポンスヘッダーを生成
+            response_header = self.build_response_header(response, request)
 
             # レスポンス全体を生成する
             response_bytes = (response_line + response_header + "\r\n").encode() + response.body
